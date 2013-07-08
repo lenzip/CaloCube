@@ -50,18 +50,20 @@ StackingAction::ClassifyNewTrack(const G4Track * aTrack)
     if (!sa){
       throw CaloCube::Exception("StackingAction") << "Cannot retrieve the SteppingAction";
     }
-    std::string name = sa->GetVolume()->GetName();
-    std::stringstream ss;
-    ss << name;
-    int is, js, ks;
-    ss >> is >> js >> ks;
-    Particle p(aTrack->GetDefinition()->GetParticleName(), 
-               aTrack->GetCreatorProcess()->GetProcessName(), 
-               aTrack->GetTotalEnergy(), 
-               aTrack->GetMomentum(),
-               is, js, ks);
-    p.setTrack(aTrack);           
-    _particles.push_back(p);
+    if (sa->GetVolume()->GetMaterial()->GetName()=="CsI(Tl)" || sa->GetVolume()->GetMaterial()->GetName()=="Aerogel"){
+      std::string name = sa->GetVolume()->GetName();
+      std::stringstream ss;
+      ss << name;
+      int is, js, ks;
+      ss >> is >> js >> ks;
+      Particle p(aTrack->GetDefinition()->GetParticleName(), 
+                aTrack->GetCreatorProcess()->GetProcessName(), 
+                aTrack->GetTotalEnergy(), 
+                aTrack->GetMomentum(),
+                is, js, ks);
+      p.setTrack(aTrack);           
+      _particles.push_back(p);
+    }
     if(aTrack->GetDefinition() == G4OpticalPhoton::OpticalPhotonDefinition()){
       return fKill;
     }

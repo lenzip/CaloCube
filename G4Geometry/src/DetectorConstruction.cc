@@ -92,9 +92,9 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
                     0,                       //copy number
                     checkOverlaps);          //overlaps checking
   G4double offset = 1.8*cm;
-  for (int i=-20; i < 20; ++i){
-    for (int j=-20; j < 20; ++j){			
-      for (unsigned int k=0; k < 40; ++k){
+  for (int i=-10; i < 10; ++i){
+    for (int j=-10; j < 10; ++j){			
+      for (unsigned int k=0; k < 20; ++k){
         //std::cout << "i:" << i << " j:" << j << " k:" << k << std::endl;
    
         //     
