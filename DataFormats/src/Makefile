@@ -602,7 +602,7 @@ uninstall-am: uninstall-libLTLIBRARIES
 	tags uninstall uninstall-am uninstall-libLTLIBRARIES
 
 
-CaloCubeDictionary.cxx: ../include/Particle.h ../include/Ref.h ../include/Position.h ../include/Crystal.h LinkDef.h
+CaloCubeDictionary.cxx: ../include/Particle.h ../include/Ref.h ../include/Position.h ../include/Crystal.h ../include/Shower.h LinkDef.h
 	rootcint -f $@ -c $(AM_CPPFLAGS) $(INCLUDES) -p $^
 
 clean:

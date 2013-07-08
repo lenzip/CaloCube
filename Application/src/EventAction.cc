@@ -35,7 +35,8 @@ EventAction::EventAction()
 : G4UserEventAction(),
   fPrintModulo(100),
   fEnergySum(0.),
-  fEnergy2Sum(0.)
+  fEnergy2Sum(0.),
+  _shower(0)
 {
   gROOT->ProcessLine("#include <vector>");
 
@@ -53,6 +54,7 @@ EventAction::EventAction()
   fTree->Branch("totalEnergy", &totalEnergy);
   fTree->Branch("particles", &_particles);
   fTree->Branch("crystals", &_crystals);
+  fTree->Branch("shower", &_shower);
   fgInstance = this;
 }
 
@@ -106,6 +108,8 @@ void EventAction::EndOfEventAction(const G4Event* /*event*/)
   }  
   totalEnergy = SteppingAction::Instance()->GetTotalEnergy()/GeV;
   _crystals = SteppingAction::Instance()->getCrystals();
+  Shower theshower(0, 0.15, _crystals);
+  _shower = &theshower;
   fTree->Fill();
   fEnergySum  += energy;
   fEnergy2Sum += energy*energy;
@@ -130,7 +134,7 @@ void EventAction::Reset()
   zend = -10000.;
   _particles.clear();
   _crystals.clear();	
-
+  _shower = 0;  
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

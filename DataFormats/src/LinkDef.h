@@ -9,12 +9,14 @@
 #pragma link C++ class vector<CaloCube::Particle>+;
 #include "Ref.h"
 #include "Crystal.h"
+#include "Shower.h"
 #pragma link C++ class CaloCube::Ref<CaloCube::Particle>+;
 #pragma link C++ class vector<CaloCube::Ref<CaloCube::Particle> >+;
 #pragma link C++ class std::pair<CaloCube::Ref<CaloCube::Particle>, double>+;
 #pragma link C++ class vector<std::pair<CaloCube::Ref<CaloCube::Particle>, double> >+;
 #pragma link C++ class CaloCube::Crystal+;
 #pragma link C++ class std::vector<CaloCube::Crystal>+;
+#pragma link C++ class CaloCube::Shower+;
 #include "CLHEP/Vector/ThreeVector.h"
 #pragma link C++ namespace CLHEP;
 #pragma link C++ class CLHEP::Hep3Vector+;

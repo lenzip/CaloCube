@@ -5,6 +5,7 @@
 #include "globals.hh"
 #include "Particle.h"
 #include "Crystal.h"
+#include "Shower.h"
 #include <vector>
 
 class B1SteppingAction;
@@ -54,6 +55,7 @@ namespace CaloCube {
       double xend, yend, zend;
       std::vector<Particle> _particles;
       std::vector<Crystal> _crystals;
+      Shower* _shower;
 
   };
 
