@@ -110,7 +110,10 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
           if (particlesSoFar[iTrack].getPositionOfOrigin() == curPos){
             _crystals[index].addParticleOriginatingHere(Ref<Particle>("tree", "particles", iTrack), step->GetTotalEnergyDeposit());
             if (track->GetDefinition()->GetParticleName() == "pi0")
-              _crystals[index].addPi0OriginatingHere(Ref<Particle>("tree", "particles", iTrack), step->GetTotalEnergyDeposit());
+              _crystals[index].addPi0OriginatingHere(Ref<Particle>("tree", "particles", iTrack), track->GetTotalEnergy());
+            if (track->GetDefinition() == G4OpticalPhoton::OpticalPhotonDefinition()){
+              _crystals[index].addOpticalOriginatingHere(Ref<Particle>("tree", "particles", iTrack), track->GetTotalEnergy());
+            }
           } else {
             _crystals[index].addParticlePassingHere(Ref<Particle>("tree", "particles", iTrack), step->GetTotalEnergyDeposit());
           }     

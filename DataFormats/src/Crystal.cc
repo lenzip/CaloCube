@@ -22,5 +22,8 @@ namespace CaloCube {
   void Crystal::addPi0OriginatingHere(const Ref<Particle>& ref, double energyDeposit){
     _allPiOOriginatingHere.push_back(std::make_pair(ref, energyDeposit));
   }
-
+  
+  void Crystal::addOpticalOriginatingHere(const Ref<Particle>& ref, double energyDeposit){
+    _allOpticalOriginatingHere.push_back(std::make_pair(ref, energyDeposit));
+  }
 }

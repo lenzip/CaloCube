@@ -25,10 +25,8 @@ namespace CaloCube {
     const std::vector<CaloCube::Ref<CaloCube::Crystal> >& getAllCrystals() const { return _crystals; }
     // access the crystals above threshold
     const std::vector<CaloCube::Ref<CaloCube::Crystal> >& getCrystalsAboveThreshold() const { return _crystalsAbove; }
-    // get the total number of scintillation photons
-    double getNScintillation() const { return _nScint; } 
-    // get the total number of Cherenlov photons
-    double getNCherenkov() const { return _nCherenkov; }
+    // get the total number of optical photons
+    double getNOptical() const { return _nOptical; } 
 
 
 
@@ -44,10 +42,8 @@ namespace CaloCube {
     std::vector<CaloCube::Ref<CaloCube::Crystal> > _crystals;
     // the vector of crystals above threshold
     std::vector<CaloCube::Ref<CaloCube::Crystal> > _crystalsAbove;
-    // number of scitillation photons in total
-    double _nScint;
-    // number of Cherenkov photons in total
-    double _nCherenkov;
+    // number of Optical photons in total
+    double _nOptical;
 
   };
 

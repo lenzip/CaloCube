@@ -64,10 +64,11 @@ StackingAction::ClassifyNewTrack(const G4Track * aTrack)
       p.setTrack(aTrack);           
       _particles.push_back(p);
     }
-    if(aTrack->GetDefinition() == G4OpticalPhoton::OpticalPhotonDefinition()){
-      return fKill;
-    }
   }
+  if(aTrack->GetDefinition() == G4OpticalPhoton::OpticalPhotonDefinition()){
+    return fKill;
+  }
+
   return fUrgent;
 }
 

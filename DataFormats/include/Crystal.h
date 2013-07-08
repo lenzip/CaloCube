@@ -29,10 +29,15 @@ namespace CaloCube {
     // get all Pi0 originating here with their energy deposit
     const std::vector<std::pair<CaloCube::Ref<CaloCube::Particle>, double> > getAllPi0PassingHere() const { return _allPiOOriginatingHere; }
 
+    // const get total optical photons
+    const std::vector<std::pair<CaloCube::Ref<CaloCube::Particle>, double> > getAllOpticalOriginatingHere() const { return _allOpticalOriginatingHere;  } 
+
+
     //setters
     void addParticlePassingHere(const CaloCube::Ref<CaloCube::Particle>& ref, double energyDeposit);
     void addParticleOriginatingHere(const CaloCube::Ref<CaloCube::Particle>& ref, double energyDeposit);
     void addPi0OriginatingHere(const CaloCube::Ref<CaloCube::Particle>& ref, double energyDeposit);
+    void addOpticalOriginatingHere(const CaloCube::Ref<CaloCube::Particle>& ref, double energyDeposit);
 
 
 
@@ -48,6 +53,7 @@ namespace CaloCube {
     std::vector<std::pair<CaloCube::Ref<CaloCube::Particle>, double> > _allParticlesOriginatingHere;
     std::vector<std::pair<CaloCube::Ref<CaloCube::Particle>, double> > _allParticlesPassingHere;
     std::vector<std::pair<CaloCube::Ref<CaloCube::Particle>, double> > _allPiOOriginatingHere;
+    std::vector<std::pair<CaloCube::Ref<CaloCube::Particle>, double> > _allOpticalOriginatingHere;
 
 
 

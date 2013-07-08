@@ -17,7 +17,7 @@ namespace CaloCube {
   _crystalsAbove()
   {
     
-
+    _nOptical = 0;
     for (unsigned int i = 0; i < crystals.size(); ++i){
       _totalEnergy += crystals[i].getTotalEnergy();
       Ref<Crystal> curRef("tree", "crystals", i); 
@@ -25,6 +25,7 @@ namespace CaloCube {
       if (crystals[i].getTotalEnergy() > _threshold){
         _crystalsAbove.push_back(curRef);        
       }
+      _nOptical += crystals[i].getAllOpticalOriginatingHere().size(); 
 
     }
     _nCrystals = _crystalsAbove.size();
