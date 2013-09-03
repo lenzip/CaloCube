@@ -208,7 +208,7 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-nobase_pkginclude_HEADERS = Exception.h  Crystal.h  GlobalEvent.h  Ref.h  Shower.h Position.h 
+nobase_pkginclude_HEADERS = Exception.h  Crystal.h  GlobalEvent.h  Ref.h  Shower.h Position.h Particle.h 
 all: all-am
 
 .SUFFIXES:

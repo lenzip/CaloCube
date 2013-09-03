@@ -34,7 +34,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = x86_64-unknown-linux-gnu
 host_triplet = x86_64-unknown-linux-gnu
-bin_PROGRAMS = simulate$(EXEEXT)
+bin_PROGRAMS = simulate$(EXEEXT) analyze$(EXEEXT)
 subdir = Main
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -50,6 +50,12 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
+am_analyze_OBJECTS = analyze-analyze.$(OBJEXT)
+analyze_OBJECTS = $(am_analyze_OBJECTS)
+analyze_DEPENDENCIES = ../DataFormats/src/libDataFormats.la
+analyze_LINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+	--mode=link $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) \
+	$(analyze_LDFLAGS) $(LDFLAGS) -o $@
 am_simulate_OBJECTS = simulate-simulate.$(OBJEXT)
 simulate_OBJECTS = $(am_simulate_OBJECTS)
 simulate_DEPENDENCIES = ../DataFormats/src/libDataFormats.la \
@@ -71,8 +77,8 @@ CXXLD = $(CXX)
 CXXLINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
 	--mode=link $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) \
 	$(LDFLAGS) -o $@
-SOURCES = $(simulate_SOURCES)
-DIST_SOURCES = $(simulate_SOURCES)
+SOURCES = $(analyze_SOURCES) $(simulate_SOURCES)
+DIST_SOURCES = $(analyze_SOURCES) $(simulate_SOURCES)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -207,6 +213,10 @@ simulate_LDADD = ../DataFormats/src/libDataFormats.la ../G4Geometry/src/libG4Geo
 simulate_SOURCES = simulate.cc
 simulate_CPPFLAGS = $(AM_CPPFLAGS) -g
 simulate_LDFLAGS = $(AM_LDFLAGS)
+analyze_LDADD = ../DataFormats/src/libDataFormats.la
+analyze_SOURCES = analyze.cc
+analyze_CPPFLAGS = $(AM_CPPFLAGS) -g
+analyze_LDFLAGS = $(AM_LDFLAGS)
 all: all-am
 
 .SUFFIXES:
@@ -284,6 +294,9 @@ clean-binPROGRAMS:
 	list=`for p in $$list; do echo "$$p"; done | sed 's/$(EXEEXT)$$//'`; \
 	echo " rm -f" $$list; \
 	rm -f $$list
+analyze$(EXEEXT): $(analyze_OBJECTS) $(analyze_DEPENDENCIES) $(EXTRA_analyze_DEPENDENCIES) 
+	@rm -f analyze$(EXEEXT)
+	$(analyze_LINK) $(analyze_OBJECTS) $(analyze_LDADD) $(LIBS)
 simulate$(EXEEXT): $(simulate_OBJECTS) $(simulate_DEPENDENCIES) $(EXTRA_simulate_DEPENDENCIES) 
 	@rm -f simulate$(EXEEXT)
 	$(simulate_LINK) $(simulate_OBJECTS) $(simulate_LDADD) $(LIBS)
@@ -294,6 +307,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+include ./$(DEPDIR)/analyze-analyze.Po
 include ./$(DEPDIR)/simulate-simulate.Po
 
 .cc.o:
@@ -316,6 +330,20 @@ include ./$(DEPDIR)/simulate-simulate.Po
 #	source='$<' object='$@' libtool=yes \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(LTCXXCOMPILE) -c -o $@ $<
+
+analyze-analyze.o: analyze.cc
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(analyze_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT analyze-analyze.o -MD -MP -MF $(DEPDIR)/analyze-analyze.Tpo -c -o analyze-analyze.o `test -f 'analyze.cc' || echo '$(srcdir)/'`analyze.cc
+	$(am__mv) $(DEPDIR)/analyze-analyze.Tpo $(DEPDIR)/analyze-analyze.Po
+#	source='analyze.cc' object='analyze-analyze.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(analyze_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o analyze-analyze.o `test -f 'analyze.cc' || echo '$(srcdir)/'`analyze.cc
+
+analyze-analyze.obj: analyze.cc
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(analyze_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT analyze-analyze.obj -MD -MP -MF $(DEPDIR)/analyze-analyze.Tpo -c -o analyze-analyze.obj `if test -f 'analyze.cc'; then $(CYGPATH_W) 'analyze.cc'; else $(CYGPATH_W) '$(srcdir)/analyze.cc'; fi`
+	$(am__mv) $(DEPDIR)/analyze-analyze.Tpo $(DEPDIR)/analyze-analyze.Po
+#	source='analyze.cc' object='analyze-analyze.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(analyze_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o analyze-analyze.obj `if test -f 'analyze.cc'; then $(CYGPATH_W) 'analyze.cc'; else $(CYGPATH_W) '$(srcdir)/analyze.cc'; fi`
 
 simulate-simulate.o: simulate.cc
 	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(simulate_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT simulate-simulate.o -MD -MP -MF $(DEPDIR)/simulate-simulate.Tpo -c -o simulate-simulate.o `test -f 'simulate.cc' || echo '$(srcdir)/'`simulate.cc

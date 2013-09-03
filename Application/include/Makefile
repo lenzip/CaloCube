@@ -208,7 +208,7 @@ target_alias =
 top_build_prefix = ../../
 top_builddir = ../..
 top_srcdir = ../..
-nobase_pkginclude_HEADERS = EventAction.h  RunAction.h  StackingAction.h  SteppingAction.h 
+nobase_pkginclude_HEADERS = EventAction.h  RunAction.h  StackingAction.h  SteppingAction.h cuboStackingAction.h cuboSteppingAction.h 
 all: all-am
 
 .SUFFIXES:

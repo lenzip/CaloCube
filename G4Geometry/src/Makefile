@@ -81,7 +81,8 @@ am_libG4Geometry_la_OBJECTS = libG4Geometry_la-AerogelFactory.lo \
 	libG4Geometry_la-CsICrystalFactory.lo \
 	libG4Geometry_la-DetectorConstruction.lo \
 	libG4Geometry_la-VolumeFactory.lo \
-	libG4Geometry_la-SimpleGeneratorAction.lo
+	libG4Geometry_la-SimpleGeneratorAction.lo \
+	libG4Geometry_la-cuboDetectorConstruction.lo
 libG4Geometry_la_OBJECTS = $(am_libG4Geometry_la_OBJECTS)
 libG4Geometry_la_LINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
@@ -232,7 +233,7 @@ top_builddir = ../..
 top_srcdir = ../..
 INCLUDES = -I../include/ -I../../DataDormats/include/
 lib_LTLIBRARIES = libG4Geometry.la
-libG4Geometry_la_SOURCES = AerogelFactory.cc  CsICrystalFactory.cc  DetectorConstruction.cc  VolumeFactory.cc SimpleGeneratorAction.cc 
+libG4Geometry_la_SOURCES = AerogelFactory.cc  CsICrystalFactory.cc  DetectorConstruction.cc  VolumeFactory.cc SimpleGeneratorAction.cc cuboDetectorConstruction.cc  
 libG4Geometry_la_CPPFLAGS = $(AM_CPPFLAGS)
 
 #libG4Geometry_la_LIBADD = ../../DataFormats/src/libDataFormats.la 
@@ -316,6 +317,7 @@ include ./$(DEPDIR)/libG4Geometry_la-CsICrystalFactory.Plo
 include ./$(DEPDIR)/libG4Geometry_la-DetectorConstruction.Plo
 include ./$(DEPDIR)/libG4Geometry_la-SimpleGeneratorAction.Plo
 include ./$(DEPDIR)/libG4Geometry_la-VolumeFactory.Plo
+include ./$(DEPDIR)/libG4Geometry_la-cuboDetectorConstruction.Plo
 
 .cc.o:
 	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -372,6 +374,13 @@ libG4Geometry_la-SimpleGeneratorAction.lo: SimpleGeneratorAction.cc
 #	source='SimpleGeneratorAction.cc' object='libG4Geometry_la-SimpleGeneratorAction.lo' libtool=yes \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libG4Geometry_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libG4Geometry_la-SimpleGeneratorAction.lo `test -f 'SimpleGeneratorAction.cc' || echo '$(srcdir)/'`SimpleGeneratorAction.cc
+
+libG4Geometry_la-cuboDetectorConstruction.lo: cuboDetectorConstruction.cc
+	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libG4Geometry_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libG4Geometry_la-cuboDetectorConstruction.lo -MD -MP -MF $(DEPDIR)/libG4Geometry_la-cuboDetectorConstruction.Tpo -c -o libG4Geometry_la-cuboDetectorConstruction.lo `test -f 'cuboDetectorConstruction.cc' || echo '$(srcdir)/'`cuboDetectorConstruction.cc
+	$(am__mv) $(DEPDIR)/libG4Geometry_la-cuboDetectorConstruction.Tpo $(DEPDIR)/libG4Geometry_la-cuboDetectorConstruction.Plo
+#	source='cuboDetectorConstruction.cc' object='libG4Geometry_la-cuboDetectorConstruction.lo' libtool=yes \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libG4Geometry_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libG4Geometry_la-cuboDetectorConstruction.lo `test -f 'cuboDetectorConstruction.cc' || echo '$(srcdir)/'`cuboDetectorConstruction.cc
 
 mostlyclean-libtool:
 	-rm -f *.lo

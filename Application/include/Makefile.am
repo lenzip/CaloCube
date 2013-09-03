@@ -1,1 +1,1 @@
-nobase_pkginclude_HEADERS = EventAction.h  RunAction.h  StackingAction.h  SteppingAction.h 
+nobase_pkginclude_HEADERS = EventAction.h  RunAction.h  StackingAction.h  SteppingAction.h cuboStackingAction.h cuboSteppingAction.h 

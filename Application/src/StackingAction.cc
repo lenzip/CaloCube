@@ -60,6 +60,7 @@ StackingAction::ClassifyNewTrack(const G4Track * aTrack)
                 aTrack->GetCreatorProcess()->GetProcessName(), 
                 aTrack->GetTotalEnergy(), 
                 aTrack->GetMomentum(),
+                aTrack->GetPosition(),
                 is, js, ks);
       p.setTrack(aTrack);           
       _particles.push_back(p);

@@ -69,7 +69,7 @@ SimpleGeneratorAction::SimpleGeneratorAction()
     = particleTable->FindParticle(particleName="proton");
   fParticleGun->SetParticleDefinition(particle);
   fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,0.,1.));
-  fParticleGun->SetParticleEnergy(2.*GeV);
+  fParticleGun->SetParticleEnergy(500.*GeV);
   
   fgInstance = this;
 }
@@ -118,7 +118,7 @@ void SimpleGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   
   fParticleGun->SetParticlePosition(G4ThreeVector(x0,y0,z0));
 */
-  fParticleGun->SetParticlePosition(G4ThreeVector(-10*cm,0.,0.));
+  fParticleGun->SetParticlePosition(G4ThreeVector(0.,0., -1*m));
   fParticleGun->GeneratePrimaryVertex(anEvent);
 }
 

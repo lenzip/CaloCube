@@ -39,7 +39,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4NistManager* nist = G4NistManager::Instance();
   // Envelope parameters
   //
-  G4double env_sizeXY = 5*m, env_sizeZ = 5*m;
+  G4double env_sizeXY = 27*cm, env_sizeZ = 72*2*cm;
   G4bool checkOverlaps = false;
 
   CsICrystalFactory csifactory;
@@ -48,8 +48,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   //     
   // World
   //
-  G4double world_sizeXY = 1.2*env_sizeXY;
-  G4double world_sizeZ  = 1.2*env_sizeZ;
+  G4double world_sizeXY = 1.*env_sizeXY;
+  G4double world_sizeZ  = 1.*env_sizeZ;
   G4Material* world_mat = nist->FindOrBuildMaterial("G4_AIR");
   
   G4Box* solidWorld =    
@@ -92,8 +92,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
                     0,                       //copy number
                     checkOverlaps);          //overlaps checking
   G4double offset = 1.8*cm;
-  for (int i=-10; i < 10; ++i){
-    for (int j=-10; j < 10; ++j){			
+  for (int i=-3; i < 3; ++i){
+    for (int j=-3; j < 3; ++j){			
       for (unsigned int k=0; k < 20; ++k){
         //std::cout << "i:" << i << " j:" << j << " k:" << k << std::endl;
    
@@ -106,13 +106,19 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
         G4LogicalVolume* logicShape1 = 0;
         //G4Material* shape1_mat = csitl; //nist->FindOrBuildMaterial("G4_A-150_TISSUE");
-        if ((i+j+k)%2 == 0){
+        //if ((i+j+k)%2 == 0){
           //std::cout << ss.str() << " is Aerogel" << std::endl;
           //shape1_mat = Aerog;
-          logicShape1 = aerogelfactory.build(ss.str());  
-        } else {
+        //  logicShape1 = aerogelfactory.build(ss.str());  
+        //} else {
+          G4VisAttributes att;
+          att.SetColour(G4Colour::Red());
+          att.SetForceAuxEdgeVisible(true);
+          //if (k>0)
+            att.SetForceWireframe(true);
           logicShape1 = csifactory.build(ss.str());
-        }
+          logicShape1->SetVisAttributes(att);
+        //}
 
         G4ThreeVector pos1 = G4ThreeVector(3.6*cm*i, 3.6*cm*j, 3.6*cm*k+offset);
               
@@ -136,8 +142,60 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
       }    
     }      
   }
+/*
+  for (int i=-4; i < 4; ++i){
+    for (int j=-4; j < 4; ++j){
+      for (unsigned int k=0; k < 20; ++k){
+        bool condition = ((i==-1 || i == 0) && (j==-4 || j==3)) || ((j==-1 || j == 0) && (i==-4 || i==3));
+        if (!condition)
+          continue;
+        //std::cout << "i:" << i << " j:" << j << " k:" << k << std::endl;
+
+        //     
+        // Shape 1
+        //
+        std::stringstream ss;
+        ss << i << " " << j << " " << k;
 
 
+        G4LogicalVolume* logicShape1 = 0;
+        //G4Material* shape1_mat = csitl; //nist->FindOrBuildMaterial("G4_A-150_TISSUE");
+        //if ((i+j+k)%2 == 0){
+          //std::cout << ss.str() << " is Aerogel" << std::endl;
+          //shape1_mat = Aerog;
+        //  logicShape1 = aerogelfactory.build(ss.str());  
+        //} else {
+          G4VisAttributes att;
+          att.SetColour(G4Colour::Red());
+          //if (k>0)
+            att.SetForceWireframe(true);
+          logicShape1 = csifactory.build(ss.str());
+          logicShape1->SetVisAttributes(att);
+        //}
+
+        G4ThreeVector pos1 = G4ThreeVector(3.6*cm*i, 3.6*cm*j, 3.6*cm*k+offset);
+
+        // Box shape
+
+        new G4PVPlacement(0,                       //no rotation
+                          pos1,                    //at position
+                          logicShape1,             //its logical volume
+                          ss.str(),                //its name
+                          logicEnv,                //its mother  volume
+                          false,                   //no boolean operation
+                          0,                       //copy number
+                          checkOverlaps);          //overlaps checking
+
+
+        // Set scoring volume to stepping action 
+        // (where we will account energy deposit)
+        //
+        //B1SteppingAction* steppingAction = B1SteppingAction::Instance(); 
+        //steppingAction->SetVolume(logicShape1);
+      }
+    }
+  } 
+*/
   //
   //always return the physical World
   //

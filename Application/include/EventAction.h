@@ -55,6 +55,7 @@ namespace CaloCube {
       double xend, yend, zend;
       std::vector<Particle> _particles;
       std::vector<Crystal> _crystals;
+      std::vector<int> _photonsCollected;
       Shower* _shower;
 
   };

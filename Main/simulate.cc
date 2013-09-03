@@ -28,12 +28,15 @@
 /// \file exampleB1.cc
 /// \brief Main program of the B1 example
 
+#include "cuboDetectorConstruction.h"
 #include "DetectorConstruction.h"
 #include "SimpleGeneratorAction.h"
 #include "RunAction.h"
 #include "EventAction.h"
 #include "SteppingAction.h"
+#include "cuboSteppingAction.h"
 #include "StackingAction.h"
+#include "cuboStackingAction.h"
 
 #include "G4RunManager.hh"
 #include "G4UImanager.hh"
@@ -42,13 +45,13 @@
 #include "G4OpticalPhysics.hh"
 
 
-#ifdef G4VIS_USE
+//#ifdef G4VIS_USE
 #include "G4VisExecutive.hh"
-#endif
+//#endif
 
-#ifdef G4UI_USE
+//#ifdef G4UI_USE
 #include "G4UIExecutive.hh"
-#endif
+//#endif
 
 #include "Randomize.hh"
 
@@ -68,7 +71,7 @@ int main(int argc,char** argv)
   // Set mandatory initialization classes
   //
   // Detector construction
-  runManager->SetUserInitialization(new CaloCube::DetectorConstruction());
+  runManager->SetUserInitialization(new CaloCube::cuboDetectorConstruction());
 
   // Physics list
   G4VModularPhysicsList* physicsList = new FTFP_BERT;
@@ -99,7 +102,7 @@ int main(int argc,char** argv)
   // Set user action classes
   //
   // Stepping action
-  runManager->SetUserAction(new CaloCube::SteppingAction());     
+  runManager->SetUserAction(new CaloCube::cuboSteppingAction());     
 
   // Event action
   runManager->SetUserAction(new CaloCube::EventAction());
@@ -107,7 +110,7 @@ int main(int argc,char** argv)
   // Run action
   runManager->SetUserAction(new CaloCube::RunAction());
 
-  G4UserStackingAction* stacking_action = new CaloCube::StackingAction;
+  G4UserStackingAction* stacking_action = new CaloCube::cuboStackingAction;
   runManager->SetUserAction(stacking_action);
 
      
@@ -115,13 +118,13 @@ int main(int argc,char** argv)
   //
   runManager->Initialize();
   
-#ifdef G4VIS_USE
+//#ifdef G4VIS_USE
   // Initialize visualization
   G4VisManager* visManager = new G4VisExecutive;
   // G4VisExecutive can take a verbosity argument - see /vis/verbose guidance.
   // G4VisManager* visManager = new G4VisExecutive("Quiet");
   visManager->Initialize();
-#endif
+//#endif
 
   // Get the pointer to the User Interface manager
   G4UImanager* UImanager = G4UImanager::GetUIpointer();
@@ -134,16 +137,16 @@ int main(int argc,char** argv)
   }
   else {
     // interactive mode : define UI session
-#ifdef G4UI_USE
+//#ifdef G4UI_USE
     G4UIExecutive* ui = new G4UIExecutive(argc, argv);
-#ifdef G4VIS_USE
+//#ifdef G4VIS_USE
     UImanager->ApplyCommand("/control/execute init_vis.mac"); 
-#else
-    UImanager->ApplyCommand("/control/execute init.mac"); 
-#endif
+//#else
+//    UImanager->ApplyCommand("/control/execute init.mac"); 
+//#endif
     ui->SessionStart();
     delete ui;
-#endif
+//#endif
   }
 
   // Job termination
@@ -151,9 +154,9 @@ int main(int argc,char** argv)
   // owned and deleted by the run manager, so they should not be deleted 
   // in the main() program !
   
-#ifdef G4VIS_USE
+//#ifdef G4VIS_USE
   delete visManager;
-#endif
+//#endif
   delete runManager;
 
   return 0;

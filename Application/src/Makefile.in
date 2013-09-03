@@ -80,7 +80,9 @@ libApplication_la_LIBADD =
 am_libApplication_la_OBJECTS = libApplication_la-EventAction.lo \
 	libApplication_la-RunAction.lo \
 	libApplication_la-StackingAction.lo \
-	libApplication_la-SteppingAction.lo
+	libApplication_la-SteppingAction.lo \
+	libApplication_la-cuboStackingAction.lo \
+	libApplication_la-cuboSteppingAction.lo
 libApplication_la_OBJECTS = $(am_libApplication_la_OBJECTS)
 libApplication_la_LINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
@@ -231,7 +233,7 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 INCLUDES = -I../include/ -I../../DataFormats/include/ -I../../G4Geometry/include/
 lib_LTLIBRARIES = libApplication.la
-libApplication_la_SOURCES = EventAction.cc  RunAction.cc  StackingAction.cc  SteppingAction.cc 
+libApplication_la_SOURCES = EventAction.cc  RunAction.cc  StackingAction.cc  SteppingAction.cc cuboStackingAction.cc cuboSteppingAction.cc 
 libApplication_la_CPPFLAGS = $(AM_CPPFLAGS)
 
 #libApplication_la_LIBADD = ../../DataFormats/src/libDataFormats.la
@@ -314,6 +316,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libApplication_la-RunAction.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libApplication_la-StackingAction.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libApplication_la-SteppingAction.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libApplication_la-cuboStackingAction.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libApplication_la-cuboSteppingAction.Plo@am__quote@
 
 .cc.o:
 @am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -363,6 +367,20 @@ libApplication_la-SteppingAction.lo: SteppingAction.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='SteppingAction.cc' object='libApplication_la-SteppingAction.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libApplication_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libApplication_la-SteppingAction.lo `test -f 'SteppingAction.cc' || echo '$(srcdir)/'`SteppingAction.cc
+
+libApplication_la-cuboStackingAction.lo: cuboStackingAction.cc
+@am__fastdepCXX_TRUE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libApplication_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libApplication_la-cuboStackingAction.lo -MD -MP -MF $(DEPDIR)/libApplication_la-cuboStackingAction.Tpo -c -o libApplication_la-cuboStackingAction.lo `test -f 'cuboStackingAction.cc' || echo '$(srcdir)/'`cuboStackingAction.cc
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/libApplication_la-cuboStackingAction.Tpo $(DEPDIR)/libApplication_la-cuboStackingAction.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='cuboStackingAction.cc' object='libApplication_la-cuboStackingAction.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libApplication_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libApplication_la-cuboStackingAction.lo `test -f 'cuboStackingAction.cc' || echo '$(srcdir)/'`cuboStackingAction.cc
+
+libApplication_la-cuboSteppingAction.lo: cuboSteppingAction.cc
+@am__fastdepCXX_TRUE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libApplication_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libApplication_la-cuboSteppingAction.lo -MD -MP -MF $(DEPDIR)/libApplication_la-cuboSteppingAction.Tpo -c -o libApplication_la-cuboSteppingAction.lo `test -f 'cuboSteppingAction.cc' || echo '$(srcdir)/'`cuboSteppingAction.cc
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/libApplication_la-cuboSteppingAction.Tpo $(DEPDIR)/libApplication_la-cuboSteppingAction.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='cuboSteppingAction.cc' object='libApplication_la-cuboSteppingAction.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libApplication_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libApplication_la-cuboSteppingAction.lo `test -f 'cuboSteppingAction.cc' || echo '$(srcdir)/'`cuboSteppingAction.cc
 
 mostlyclean-libtool:
 	-rm -f *.lo

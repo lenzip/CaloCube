@@ -107,7 +107,7 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
             throw CaloCube::Exception("SteppingAction") << "Cannot retrieve track from StackingAction!!";
       
           //now check if this track originated here
-          if (particlesSoFar[iTrack].getPositionOfOrigin() == curPos){
+          if (particlesSoFar[iTrack].getCrystalPosition() == curPos){
             _crystals[index].addParticleOriginatingHere(Ref<Particle>("tree", "particles", iTrack), step->GetTotalEnergyDeposit());
             if (track->GetDefinition()->GetParticleName() == "pi0")
               _crystals[index].addPi0OriginatingHere(Ref<Particle>("tree", "particles", iTrack), track->GetTotalEnergy());
