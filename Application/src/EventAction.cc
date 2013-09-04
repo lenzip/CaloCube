@@ -56,6 +56,8 @@ EventAction::EventAction()
   fTree->Branch("totalEnergy", &totalEnergy);
   fTree->Branch("particles", &_particles);
   fTree->Branch("photonsCollected", &_photonsCollected);
+  fTree->Branch("primaryTheta", &_primaryTheta);
+  fTree->Branch("primaryPhi", &_primaryPhi);
   //fTree->Branch("shower", &_shower);
   fgInstance = this;
 }
@@ -85,8 +87,13 @@ void EventAction::BeginOfEventAction(const G4Event* event)
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void EventAction::EndOfEventAction(const G4Event* /*event*/)
+void EventAction::EndOfEventAction(const G4Event* event)
 {
+  G4PrimaryVertex* primaryVertex = event->GetPrimaryVertex();
+  G4PrimaryParticle* primaryParticle = primaryVertex->GetPrimary();
+  _primaryTheta = primaryParticle->GetMomentum().theta();
+  _primaryPhi = primaryParticle->GetMomentum().phi();
+
   G4RunManager* rmanager = G4RunManager::GetRunManager();
   const cuboStackingAction* sa = dynamic_cast<const cuboStackingAction*>(rmanager->GetUserStackingAction());
   // accumulate statistics

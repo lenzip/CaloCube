@@ -57,6 +57,8 @@ namespace CaloCube {
       std::vector<Crystal> _crystals;
       std::vector<int> _photonsCollected;
       Shower* _shower;
+      double _primaryTheta;
+      double _primaryPhi;
 
   };
 

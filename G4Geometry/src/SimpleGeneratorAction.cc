@@ -68,7 +68,6 @@ SimpleGeneratorAction::SimpleGeneratorAction()
   G4ParticleDefinition* particle
     = particleTable->FindParticle(particleName="proton");
   fParticleGun->SetParticleDefinition(particle);
-  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,0.,1.));
   fParticleGun->SetParticleEnergy(500.*GeV);
   
   fgInstance = this;
@@ -92,11 +91,11 @@ void SimpleGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   // In order to avoid dependence of SimpleGeneratorAction
   // on DetectorConstruction class we get Envelope volume
   // from G4LogicalVolumeStore.
- /* 
+  
   G4double envSizeXY = 0;
   G4double envSizeZ = 0;
   G4LogicalVolume* envLV
-    = G4LogicalVolumeStore::GetInstance()->GetVolume("Envelope");
+    = G4LogicalVolumeStore::GetInstance()->GetVolume("CsI_Cube");
   G4Box* envBox = NULL;
   if ( envLV ) envBox = dynamic_cast<G4Box*>(envLV->GetSolid());
   if ( envBox ) {
@@ -109,16 +108,22 @@ void SimpleGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     G4cerr << "The gun will be place in the center." << G4endl;
   }
 
-  G4double size = 0.8; 
   G4double x0 = 0.;
   //G4double x0 = size * envSizeXY * (G4UniformRand()-0.5);
   G4double y0 = 0.;
   //G4double y0 = size * envSizeXY * (G4UniformRand()-0.5);
-  G4double z0 = -10 * envSizeZ;
+  G4double z0 = -envSizeZ;
+
   
   fParticleGun->SetParticlePosition(G4ThreeVector(x0,y0,z0));
-*/
-  fParticleGun->SetParticlePosition(G4ThreeVector(0.,0., -1*m));
+  G4ThreeVector direction(0,0,1.);
+  direction.setTheta((G4UniformRand())*M_PI*30./180.);
+  if (G4UniformRand() > 0.5)
+    direction.setPhi(M_PI/2.);
+  else
+    direction.setPhi(-M_PI/2.);
+  std::cout << "(nx, ny, nz): " << direction.x() << ", " <<direction.y() << ", " << direction.z() << std::endl;
+  fParticleGun->SetParticleMomentumDirection(direction);
   fParticleGun->GeneratePrimaryVertex(anEvent);
 }
 
